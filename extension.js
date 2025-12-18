@@ -4,22 +4,25 @@ const vscode = require("vscode");
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-    console.log("Terminal Title Context extension is now active");
+    log("extension is now active");
 
 	let previousTerminalTitle = "";
 
-    function updateTerminalTitleContext(terminal) {
-        const terminalTitle = terminal ? terminal.name : "";
-		console.log("update detected. title:", terminalTitle)
+	/**
+	 * note: using "terminal" from callback does not work correctly, as its title is outdated.
+	 * so here, we're using the vscode.window.activeTerminal, which works correctly.
+	 */
+    function updateTerminalTitleContext() {
+        const terminalTitle = vscode.window.activeTerminal?.name;
+		const willSkip = !terminalTitle || terminalTitle === previousTerminalTitle
 
-		if (terminalTitle === previousTerminalTitle) {
-			console.log("title unchanged, skipping update");
+		if (willSkip) {
 			return;
 		}
 
-		previousTerminalTitle = terminalTitle;
-
 		vscode.commands.executeCommand("setContext", "terminalTitle", terminalTitle);
+		previousTerminalTitle = terminalTitle;
+		log("update detected. title:", terminalTitle)
     }
 
 	const subs = [
@@ -35,10 +38,18 @@ function activate(context) {
 	}
 
     /* set initial context */
-    updateTerminalTitleContext(vscode.window.activeTerminal);
+    updateTerminalTitleContext();
 }
 
 function deactivate() {}
+
+const EXT_NAME = "kiprasmel.terminal-title-context";
+
+function log(...msgs) {
+	if (!!process.env.DEBUG_TERMINAL_TITLE) {
+		console.warn(EXT_NAME + ":", ...msgs)
+	}
+}
 
 module.exports = {
     activate,

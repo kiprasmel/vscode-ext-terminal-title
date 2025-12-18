@@ -7,8 +7,8 @@
 	"repository": "https://github.com/kiprasmel/vscode-ext-terminal-title",
 	"main": "./extension.js",
 	"scripts": {
-		"build": "vsce package",
-		"reinstall": "yarn build && { cursor --uninstall-extension kiprasmel.terminal-title-context || :; } && cursor --install-extension terminal-title-context-0.0.1.vsix"
+		"build": "vsce package --skip-license",
+		"reinstall": "./reinstall.sh"
 	},
 	"contributes": {},
 	"activationEvents": [
