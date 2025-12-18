@@ -3,9 +3,12 @@
 	"displayName": "Terminal Title Context",
 	"description": "Exposes the currently focused terminal title as context for keybindings",
 	"version": "0.0.1",
+	"publisher": "kiprasmel",
+	"repository": "https://github.com/kiprasmel/vscode-ext-terminal-title",
 	"main": "./extension.js",
 	"scripts": {
-		"pack": "vsce package"
+		"build": "vsce package",
+		"reinstall": "yarn build && { cursor --uninstall-extension kiprasmel.terminal-title-context || :; } && cursor --install-extension terminal-title-context-0.0.1.vsix"
 	},
 	"contributes": {},
 	"activationEvents": [
@@ -17,6 +20,9 @@
 	"engines": {
 		"vscode": "^1.74.0"
 	},
+	"enabledApiProposals": [
+		"terminalDataWriteEvent"
+	],
 	"devDependencies": {
 		"@vscode/vsce": "^3.2.1"
 	}
