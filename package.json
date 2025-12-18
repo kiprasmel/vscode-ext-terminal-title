@@ -7,7 +7,7 @@
 	"repository": "https://github.com/kiprasmel/vscode-ext-terminal-title",
 	"main": "./extension.js",
 	"scripts": {
-		"build": "vsce package --skip-license",
+		"build": "vsce package",
 		"reinstall": "./reinstall.sh"
 	},
 	"contributes": {},
