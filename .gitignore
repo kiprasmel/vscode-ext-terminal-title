@@ -1,0 +1,4 @@
+*.tgz
+*.vsix
+*.log
+node_modules

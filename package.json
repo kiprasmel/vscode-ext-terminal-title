@@ -1,0 +1,23 @@
+{
+	"name": "terminal-title-context",
+	"displayName": "Terminal Title Context",
+	"description": "Exposes the currently focused terminal title as context for keybindings",
+	"version": "0.0.1",
+	"main": "./extension.js",
+	"scripts": {
+		"pack": "vsce package"
+	},
+	"contributes": {},
+	"activationEvents": [
+		"onStartupFinished"
+	],
+	"categories": [
+		"Other"
+	],
+	"engines": {
+		"vscode": "^1.74.0"
+	},
+	"devDependencies": {
+		"@vscode/vsce": "^3.2.1"
+	}
+}
